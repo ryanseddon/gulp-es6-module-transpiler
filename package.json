@@ -1,0 +1,41 @@
+{
+  "name": "gulp-es6-module-transpiler",
+  "version": "0.0.0",
+  "description": "A plugin for Gulp",
+  "keywords": [
+    "gulpplugin"
+  ],
+  "homepage": "https://github.com/ryanseddon/gulp-es6-module-transpiler",
+  "bugs": "https://github.com/ryanseddon/gulp-es6-module-transpiler/issues",
+  "author": {
+    "name": "Ryan Seddon",
+    "email": "",
+    "url": "https://github.com/ryanseddon"
+  },
+  "main": "./index.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/ryanseddon/gulp-es6-module-transpiler.git"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "dependencies": {
+    "event-stream": "*",
+    "es6-module-transpiler": "~0.3.6"
+  },
+  "devDependencies": {
+    "mocha": "~1.14.0",
+    "should": "~2.1.0",
+    "gulp-util": "~2.2.0"
+  },
+  "engines": {
+    "node": ">=0.8.0",
+    "npm": ">=1.2.10"
+  },
+  "licenses": [
+    {
+      "type": "MIT"
+    }
+  ]
+}
