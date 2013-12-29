@@ -13,10 +13,10 @@ npm install --save-dev gulp-es6-module-transpiler
 Then, add it to your `gulpfile.js`:
 
 ```javascript
-var es6-module-transpiler = require("gulp-es6-module-transpiler");
+var es6ModuleTranspiler = require("gulp-es6-module-transpiler");
 
 gulp.src("./src/*.js")
-	.pipe(es6-module-transpiler({
+	.pipe(es6ModuleTranspiler({
 		type: "amd"
 	}))
 	.pipe(gulp.dest("./dist"));
@@ -24,11 +24,10 @@ gulp.src("./src/*.js")
 
 ## API
 
-### es6-module-transpiler(options)
+### es6ModuleTranspiler(options)
 
 #### options.type
-Type: `String`  
-Default: `globals`
+Type: `String`
 
 #### options.moduleName
 Type: `String`  
