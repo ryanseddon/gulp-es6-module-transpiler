@@ -34,7 +34,7 @@ module.exports = function (opts) {
 					method = "toGlobals";
 			}
 
-			contents = compiler.toAMD();
+			contents = compiler[method].apply(compiler);
 			file.contents = new Buffer(String(contents));
 
 			callback(null, file);
