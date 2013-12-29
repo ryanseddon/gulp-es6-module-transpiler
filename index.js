@@ -15,10 +15,16 @@ module.exports = function (opts) {
 	function es6ModuleTranspiler(file, callback) {
 		// check if file.contents is a `Buffer`
 		if (file.contents instanceof Buffer) {
-
-			var compiler = new Compiler(String(file.contents)),
+			var moduleName = '',
 				method,
-				contents;
+				contents,
+				compiler;
+			
+			if(opts.moduleName) {
+				moduleName = opts.moduleName;
+			}
+
+			compiler = new Compiler(String(file.contents), moduleName, opts);
 
 			switch(opts.type) {
 				case "amd":

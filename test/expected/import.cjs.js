@@ -1,2 +1,2 @@
 "use strict";
-require("foo");
+var foo = require("bar").foo;
