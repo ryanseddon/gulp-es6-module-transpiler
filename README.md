@@ -15,9 +15,9 @@ Then, add it to your `gulpfile.js`:
 ```javascript
 var es6-module-transpiler = require("gulp-es6-module-transpiler");
 
-gulp.src("./src/*.ext")
+gulp.src("./src/*.js")
 	.pipe(es6-module-transpiler({
-		msg: "Hello Gulp!"
+		type: "amd"
 	}))
 	.pipe(gulp.dest("./dist"));
 ```
@@ -26,11 +26,16 @@ gulp.src("./src/*.ext")
 
 ### es6-module-transpiler(options)
 
-#### options.msg
+#### options.type
 Type: `String`  
-Default: `Hello World`
+Default: `globals`
 
-The message you wish to attach to file.
+#### options.moduleName
+Type: `String`  
+Default: `''`
+
+#### options.exports
+Type: `Object`  
 
 
 ## License
