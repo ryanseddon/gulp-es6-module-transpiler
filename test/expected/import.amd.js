@@ -1,4 +1,4 @@
-define(
+define("import", 
   ["bar"],
   function(__dependency1__) {
     "use strict";

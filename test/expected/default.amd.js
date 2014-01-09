@@ -1,4 +1,4 @@
-define(
+define("default", 
   ["exports"],
   function(__exports__) {
     "use strict";

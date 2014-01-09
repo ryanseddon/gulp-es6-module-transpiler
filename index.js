@@ -1,6 +1,7 @@
 var es = require("event-stream");
 var Compiler = require("es6-module-transpiler").Compiler;
 var fs = require("fs");
+var path = require("path");
 
 module.exports = function (opts) {
 	"use strict";
@@ -15,13 +16,22 @@ module.exports = function (opts) {
 	function es6ModuleTranspiler(file, callback) {
 		// check if file.contents is a `Buffer`
 		if (file.contents instanceof Buffer) {
-			var moduleName = '',
+			var moduleName,
+				ext = path.extname(file.path),
 				method,
 				contents,
 				compiler;
-			
-			if(opts.moduleName) {
+
+			if (opts.anonymous) {
+				moduleName = '';
+			} else if (typeof opts.moduleName === 'string') {
 				moduleName = opts.moduleName;
+			} else {
+				moduleName = file.relative.slice(0, -ext.length);
+
+				if (opts.moduleName) {
+					moduleName = opts.moduleName(moduleName, file);
+				}
 			}
 
 			compiler = new Compiler(String(file.contents), moduleName, opts);
