@@ -1,4 +1,4 @@
-YUI.add("@NAME@", function(Y, NAME, __imports__, __exports__) {
+YUI.add("default", function(Y, NAME, __imports__, __exports__) {
     "use strict";
     var jQuery = function() { };
 

@@ -45,6 +45,13 @@ describe("gulp-es6ModuleTranspiler:", function () {
 						type: type,
 						moduleName: 'Bar'
 					};
+				} else if(file === 'export-modname.js') {
+					streamOpts = {
+						type: type,
+						moduleName: function(name, file) {
+							return 'foo/bar';
+						}
+					};
 				} else {
 					streamOpts = {
 						type: type
