@@ -3,7 +3,11 @@
   "version": "0.1.0",
   "description": "Gulp plugin to transpile ES6 module syntax",
   "keywords": [
-    "gulpplugin"
+    "gulp",
+    "plugin",
+    "es6",
+    "module",
+    "transpile"
   ],
   "homepage": "https://github.com/ryanseddon/gulp-es6-module-transpiler",
   "bugs": "https://github.com/ryanseddon/gulp-es6-module-transpiler/issues",
@@ -22,7 +26,7 @@
   },
   "dependencies": {
     "event-stream": "*",
-    "es6-module-transpiler": "~0.3.6"
+    "es6-module-transpiler": "~0.4.0"
   },
   "devDependencies": {
     "mocha": "~1.14.0",

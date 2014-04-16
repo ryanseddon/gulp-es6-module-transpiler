@@ -1,30 +1,22 @@
 var es = require("event-stream");
 var Compiler = require("es6-module-transpiler").Compiler;
-var fs = require("fs");
 var path = require("path");
 
 module.exports = function (opts) {
 	"use strict";
-
-	// if(typeof name == 'object') {
-	// 	opts = name;
-	// 	//name = '';
-	// }
 
 	// see "Writing a plugin"
 	// https://github.com/wearefractal/gulp/wiki/Writing-a-gulp-plugin
 	function es6ModuleTranspiler(file, callback) {
 		// check if file.contents is a `Buffer`
 		if (file.contents instanceof Buffer) {
-			var moduleName,
+			var moduleName = null,
 				ext = path.extname(file.path),
 				method,
 				contents,
 				compiler;
 
-			if (opts.anonymous) {
-				moduleName = '';
-			} else if (typeof opts.moduleName === 'string') {
+			if (typeof opts.moduleName === "string") {
 				moduleName = opts.moduleName;
 			} else {
 				moduleName = file.relative.slice(0, -ext.length);
@@ -36,7 +28,7 @@ module.exports = function (opts) {
 
 			compiler = new Compiler(String(file.contents), moduleName, opts);
 
-			switch(opts.type) {
+			switch (opts.type) {
 				case "amd":
 					method = "toAMD";
 					break;
@@ -50,8 +42,8 @@ module.exports = function (opts) {
 					method = "toGlobals";
 			}
 
-			contents = compiler[method].apply(compiler);
-			file.contents = new Buffer(String(contents));
+			contents = compiler[method].call(compiler);
+			file.contents = new Buffer(contents);
 
 			callback(null, file);
 		} else { // assume it is a `stream.Readable`
