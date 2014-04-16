@@ -1,6 +1,6 @@
 {
   "name": "gulp-es6-module-transpiler",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Gulp plugin to transpile ES6 module syntax",
   "keywords": [
     "gulp",
@@ -34,7 +34,7 @@
     "gulp-util": "~2.2.0"
   },
   "engines": {
-    "node": ">=0.8.0",
+    "node": ">=0.10.0",
     "npm": ">=1.2.10"
   },
   "licenses": [
