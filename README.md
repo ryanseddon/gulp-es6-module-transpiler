@@ -29,6 +29,9 @@ gulp.src("./src/*.js")
 #### options.type
 Type: `String`
 
+#### options.prefix
+Type: `String`
+
 #### options.moduleName
 Type: `String`
 Default: `''`
