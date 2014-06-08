@@ -42,6 +42,7 @@ Type: `Object`
 ## Release history
 
 * 16/04/2014 - v0.1.1 - Version bump to 0.4.0
+* 08/06/2014 - v0.1.2 - Added module prefix option
 
 ## License
 
