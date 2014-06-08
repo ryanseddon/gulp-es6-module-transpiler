@@ -52,6 +52,14 @@ describe("gulp-es6ModuleTranspiler:", function () {
 							return 'foo/bar';
 						}
 					};
+				} else if(file === 'export-modprefix.js') {
+					streamOpts = {
+						type: type,
+						prefix: 'js',
+						moduleName: function(name, file) {
+							return 'foo/bar';
+						}
+					};
 				} else {
 					streamOpts = {
 						type: type

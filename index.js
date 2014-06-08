@@ -24,6 +24,14 @@ module.exports = function (opts) {
 				if (opts.moduleName) {
 					moduleName = opts.moduleName(moduleName, file);
 				}
+
+				if (opts.prefix) {
+					var prefix = opts.prefix;
+					if (opts.prefix.charAt(opts.prefix.length -1) !== "/") {
+						prefix += "/";
+					}
+					moduleName = prefix + moduleName;
+				}
 			}
 
 			compiler = new Compiler(String(file.contents), moduleName, opts);
