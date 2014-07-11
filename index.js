@@ -19,7 +19,7 @@ module.exports = function (opts) {
 			if (typeof opts.moduleName === "string") {
 				moduleName = opts.moduleName;
 			} else {
-				moduleName = file.relative.slice(0, -ext.length);
+				moduleName = file.relative.slice(0, -ext.length).replace(/\\/g, '/');
 
 				if (opts.moduleName) {
 					moduleName = opts.moduleName(moduleName, file);
