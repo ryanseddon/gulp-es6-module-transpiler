@@ -1,0 +1,18 @@
+{
+  "name": "gulp-es6-module-transpiler",
+  "version": "0.0.0",
+  "description": "",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Markus Ast <npm.m@rkusa.st>",
+  "license": "MIT",
+  "dependencies": {
+    "es6-module-transpiler": "^0.6.2",
+    "gulp-util": "^3.0.1",
+    "recast": "^0.7.2",
+    "through2": "^0.6.1",
+    "vinyl-sourcemaps-apply": "^0.1.1"
+  }
+}
