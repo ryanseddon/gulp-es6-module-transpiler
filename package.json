@@ -1,18 +1,32 @@
 {
   "name": "gulp-es6-module-transpiler",
-  "version": "0.0.0",
-  "description": "",
-  "main": "lib/index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "author": "Markus Ast <npm.m@rkusa.st>",
+  "version": "0.0.0",
+  "description": "Gulp plugin for the ES6 Module Transpiler",
+  "keywords": [
+    "gulpplugin",
+    "gulp",
+    "es6",
+    "module",
+    "transpile",
+    "amd",
+    "commonjs"
+  ],
+  "main": "lib/index.js",
   "license": "MIT",
   "dependencies": {
-    "es6-module-transpiler": "^0.6.2",
+    "es6-module-transpiler": "rkusa/es6-module-transpiler",
     "gulp-util": "^3.0.1",
-    "recast": "^0.7.2",
+    "recast": "^0.6.6",
     "through2": "^0.6.1",
     "vinyl-sourcemaps-apply": "^0.1.1"
+  },
+  "bugs": {
+    "url": "https://github.com/rkusa/gulp-es6-module-transpiler/issues"
+  },
+  "homepage": "https://github.com/rkusa/gulp-es6-module-transpiler",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:rkusa/gulp-es6-module-transpiler.git"
   }
 }
