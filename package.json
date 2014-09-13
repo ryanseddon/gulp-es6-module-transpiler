@@ -26,7 +26,7 @@
   },
   "dependencies": {
     "event-stream": "*",
-    "es6-module-transpiler": "~0.4.0"
+    "es6-module-transpiler": "~0.6.0"
   },
   "devDependencies": {
     "mocha": "~1.14.0",
