@@ -3,7 +3,7 @@
 [Gulp](https://github.com/gulpjs/gulp) plugin for the [ES6 Module Transpiler](https://github.com/esnext/es6-module-transpiler)
 
 [![NPM][npm]](https://npmjs.org/package/gulp-es6mt)
-[![Dependency Status][dependencies]](https://david-dm.org/rkusa/gulp-es6-module-transpiler)
+[![Dependency Status][dependencies]](https://david-dm.org/rkusa/gulp-es6mt)
 
 ```js
 npm install gulp-es6mt
@@ -35,5 +35,5 @@ The above copyright notice and this permission notice shall be included in all c
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-[npm]: http://img.shields.io/npm/v/gulp-es6-module-transpiler.svg?style=flat-square
-[dependencies]: http://img.shields.io/david/rkusa/gulp-es6-module-transpiler.svg?style=flat-square
+[npm]: http://img.shields.io/npm/v/gulp-es6mt.svg?style=flat-square
+[dependencies]: http://img.shields.io/david/rkusa/gulp-es6mt.svg?style=flat-square
