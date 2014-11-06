@@ -1,58 +1,42 @@
-var es = require("event-stream");
-var Compiler = require("es6-module-transpiler").Compiler;
+"use strict";
+
 var path = require("path");
+var es = require("event-stream");
+var transpiler = require("es6-module-transpiler");
+var Container = transpiler.Container;
+var FileResolver = transpiler.FileResolver;
+var BundleFormatter = transpiler.formatters.bundle;
+var CommonjsFormatter = transpiler.formatters.commonjs;
 
 module.exports = function (opts) {
-	"use strict";
 
 	// see "Writing a plugin"
 	// https://github.com/wearefractal/gulp/wiki/Writing-a-gulp-plugin
 	function es6ModuleTranspiler(file, callback) {
 		// check if file.contents is a `Buffer`
 		if (file.contents instanceof Buffer) {
-			var moduleName = null,
-				ext = path.extname(file.path),
-				method,
-				contents,
-				compiler;
+			var contents,
+				Formatter,
+				container;
 
-			if (typeof opts.moduleName === "string") {
-				moduleName = opts.moduleName;
+			if (opts.type && opts.type === "cjs"){
+				Formatter = CommonjsFormatter;
 			} else {
-				moduleName = file.relative.slice(0, -ext.length).replace(/\\/g, '/');
-
-				if (opts.moduleName) {
-					moduleName = opts.moduleName(moduleName, file);
-				}
-
-				if (opts.prefix) {
-					var prefix = opts.prefix;
-					if (opts.prefix.charAt(opts.prefix.length -1) !== "/") {
-						prefix += "/";
-					}
-					moduleName = prefix + moduleName;
-				}
+				Formatter = BundleFormatter;
 			}
 
-			compiler = new Compiler(String(file.contents), moduleName, opts);
+			container = new Container({
+				resolvers: [new FileResolver([path.resolve(__dirname, file.path)])],
+				formatter: new Formatter()
+			});
 
-			switch (opts.type) {
-				case "amd":
-					method = "toAMD";
-					break;
-				case "cjs":
-					method = "toCJS";
-					break;
-				case "yui":
-					method = "toYUI";
-					break;
-				default:
-					method = "toGlobals";
-			}
-
-			contents = compiler[method].call(compiler);
+			container.getModule(path.resolve(__dirname, file.path));
+			contents = container.transform();
+			var content = contents[0].code;
+console.log('contents------------')
+console.log(content)
 			file.contents = new Buffer(contents);
-
+console.log(container)
 			callback(null, file);
 		} else { // assume it is a `stream.Readable`
 			// http://nodejs.org/api/stream.html
