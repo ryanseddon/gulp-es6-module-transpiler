@@ -9,16 +9,16 @@ require("mocha");
 var gutil = require("gulp-util"),
 	es6ModuleTranspiler = require("../"),
 	fixtures = fs.readdirSync(process.cwd() + "/test/fixtures"),
-	types = ['amd', 'cjs', 'yui', 'globals'];
+	types = ['cjs', 'globals'];
 
 describe("gulp-es6ModuleTranspiler:", function () {
 
 	fixtures.forEach(function(file) {
-		
+
 		types.forEach(function(type) {
 			var expected = file.replace('.js', '.'+ type +'.js'),
 				streamOpts;
-			
+
 			var expectedFile = new gutil.File({
 				path: "test/expected/" + expected,
 				cwd: "test/",
