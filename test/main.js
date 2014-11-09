@@ -13,12 +13,37 @@ var gutil = require("gulp-util"),
 
 describe("gulp-es6ModuleTranspiler:", function () {
 
+	it("should pass file when it isNull()", function (done) {
+		var stream = es6ModuleTranspiler();
+		var emptyFile = {
+			isNull: function () { return true; }
+		};
+		stream.on("data", function (data) {
+			data.should.equal(emptyFile);
+			done();
+		});
+		stream.write(emptyFile);
+	});
+
+	it("should emit error when file isStream()", function (done) {
+		var stream = es6ModuleTranspiler();
+		var streamFile = {
+			isNull: function () { return false; },
+			isStream: function () { return true; }
+		};
+		stream.on("error", function (err) {
+			err.message.should.equal("streams not supported");
+			done();
+		});
+		stream.write(streamFile);
+	});
+
 	fixtures.forEach(function(file) {
-		
+
 		types.forEach(function(type) {
 			var expected = file.replace('.js', '.'+ type +'.js'),
 				streamOpts;
-			
+
 			var expectedFile = new gutil.File({
 				path: "test/expected/" + expected,
 				cwd: "test/",
@@ -79,32 +104,6 @@ describe("gulp-es6ModuleTranspiler:", function () {
 
 					String(newFile.contents).should.equal(String(expectedFile.contents));
 					done();
-				});
-
-				stream.write(srcFile);
-				stream.end();
-			});
-
-			it("should error on stream", function (done) {
-
-				var srcFile = new gutil.File({
-					path: "test/fixtures/" + file,
-					cwd: "test/",
-					base: "test/fixtures",
-					contents: fs.createReadStream("test/fixtures/" + file)
-				});
-
-				var stream = es6ModuleTranspiler({type: type});
-
-				stream.on("error", function(err) {
-					should.exist(err);
-					done();
-				});
-
-				stream.on("data", function (newFile) {
-					newFile.contents.pipe(es.wait(function(err, data) {
-						done(err);
-					}));
 				});
 
 				stream.write(srcFile);
