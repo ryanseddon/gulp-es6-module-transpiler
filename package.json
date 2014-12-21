@@ -1,25 +1,24 @@
 {
-  "name": "gulp-es6mt",
-  "author": "Markus Ast <npm.m@rkusa.st>",
+  "name": "gulp-es6-module-transpiler",
   "version": "1.1.0",
   "description": "Gulp plugin for the ES6 Module Transpiler",
+  "author": "Markus Ast <npm.m@rkusa.st>",
+  "contributors": [
+    "Ján Naništa <jan.jakub.nanista@gmail.com>"
+  ],
   "keywords": [
     "gulpplugin",
     "gulp",
     "es6",
     "module",
     "transpile",
-    "amd",
     "commonjs"
   ],
   "main": "lib/index.js",
-  "license": "MIT",
-  "dependencies": {
-    "es6-module-transpiler": "^0.9.3",
-    "gulp-util": "^3.0.1",
-    "through2": "^0.6.1",
-    "vinyl-sourcemaps-apply": "^0.1.1"
+  "scripts": {
+    "test": "./node_modules/jshint/bin/jshint lib/index.js test/index.js && ./node_modules/mocha/bin/mocha test/index.js"
   },
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/rkusa/gulp-es6-module-transpiler/issues"
   },
@@ -27,5 +26,17 @@
   "repository": {
     "type": "git",
     "url": "git@github.com:rkusa/gulp-es6-module-transpiler.git"
+  },
+  "dependencies": {
+    "es6-module-transpiler": "^0.9.3",
+    "gulp-util": "^3.0.1",
+    "through2": "^0.6.1",
+    "vinyl-sourcemaps-apply": "^0.1.1"
+  },
+  "devDependencies": {
+    "expect.js": "^0.3.1",
+    "jshint": "^2.5.11",
+    "mocha": "^2.0.1",
+    "temp-write": "^1.1.0"
   }
 }
