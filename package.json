@@ -9,10 +9,12 @@
     "es6",
     "module",
     "transpile",
-    "amd",
     "commonjs"
   ],
   "main": "lib/index.js",
+  "scripts": {
+    "test": "mocha test/index.js"
+  },
   "license": "MIT",
   "dependencies": {
     "es6-module-transpiler": "^0.9.3",
@@ -27,5 +29,11 @@
   "repository": {
     "type": "git",
     "url": "git@github.com:rkusa/gulp-es6-module-transpiler.git"
+  },
+  "devDependencies": {
+    "expect.js": "^0.3.1",
+    "gulp-util": "^3.0.1",
+    "mocha": "^2.0.1",
+    "temp-write": "^1.1.0"
   }
 }
