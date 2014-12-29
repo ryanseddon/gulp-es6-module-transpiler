@@ -1,10 +1,14 @@
 {
   "name": "gulp-es6-module-transpiler",
-  "version": "1.1.0",
+  "version": "0.1.3",
   "description": "Gulp plugin for the ES6 Module Transpiler",
-  "author": "Markus Ast <npm.m@rkusa.st>",
+  "author": [
+	"name": "Gulp ES6 Module Transpiler"
+  ],
   "contributors": [
-    "Ján Naništa <jan.jakub.nanista@gmail.com>"
+	{ "name": "Markus Ast" },
+    { "name": "Ján Naništa" },
+    { "name": "Ryan Seddon" }
   ],
   "keywords": [
     "gulpplugin",
@@ -28,7 +32,7 @@
     "url": "git@github.com:rkusa/gulp-es6-module-transpiler.git"
   },
   "dependencies": {
-    "es6-module-transpiler": "^0.9.3",
+    "es6-module-transpiler": "^0.9.6",
     "gulp-util": "^3.0.1",
     "through2": "^0.6.1",
     "vinyl-sourcemaps-apply": "^0.1.1"
