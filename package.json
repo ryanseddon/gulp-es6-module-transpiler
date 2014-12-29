@@ -2,11 +2,11 @@
   "name": "gulp-es6-module-transpiler",
   "version": "0.1.3",
   "description": "Gulp plugin for the ES6 Module Transpiler",
-  "author": [
-	"name": "Gulp ES6 Module Transpiler"
-  ],
+  "author": {
+    "name": "Gulp ES6 Module Transpiler"
+  },
   "contributors": [
-	{ "name": "Markus Ast" },
+    { "name": "Markus Ast" },
     { "name": "Ján Naništa" },
     { "name": "Ryan Seddon" }
   ],
