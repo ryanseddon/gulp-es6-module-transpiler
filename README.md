@@ -50,6 +50,9 @@ Name of built-in formatter, formatter instance of formatter constructor function
 
 Defaults to [es6-module-transpiler](https://github.com/esnext/es6-module-transpiler) default formatter.
 
+**Important** es6-module-transpiler version 0.9.x supports ```bundle``` and ```commonjs``` formatters only.
+To support AMD format, please use [es6-module-transpiler-amd-formatter](https://github.com/caridy/es6-module-transpiler-amd-formatter).
+
 ```basePath``` *```String```* *[optional]*
 
 All module names will be resolved and named relatively to this path.
