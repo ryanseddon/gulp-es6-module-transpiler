@@ -12,7 +12,8 @@ var gutil = require('gulp-util'),
     transpiler = require('../lib/index');
 
 var inputDir = __dirname + '/input/main/',
-    altInputDir = __dirname + '/input/alternative/';
+    altInputDir = __dirname + '/input/alternative/',
+    cwd = process.cwd();
 
 describe('gulp-es6-module-transpiler', function() {
     function make(options) {
@@ -180,6 +181,10 @@ describe('gulp-es6-module-transpiler', function() {
         });
 
         describe('basePath', function() {
+            afterEach(function() {
+                process.chdir(cwd);
+            });
+
             it('should use current working directory by default', function(done) {
                 process.chdir(inputDir);
 
@@ -207,68 +212,55 @@ describe('gulp-es6-module-transpiler', function() {
             });
         });
 
-        describe('moduleName', function() {
-            it('should use "bundle" if there are more modules', function(done) {
-                verify({
-                    sources: [inputs.export, inputs.foo],
-                    basePath: inputDir
-                }, {
-                    modules: ['export', 'foo'],
-                    output: 'bundle',
-                    formatter: transpiler.formatters.DEFAULT
-                }, done);
-            });
-
-            it('should use module name if there is only one', function(done) {
-                verify({
-                    sources: [inputs.default],
-                    basePath: inputDir
-                }, {
-                    modules: ['default'],
-                    output: 'default',
-                    formatter: transpiler.formatters.DEFAULT
-                }, done);
-            });
-
-            it('should use moduleName from options if specified', function(done) {
-                verify({
-                    sources: [inputs.default],
-                    basePath: inputDir,
-                    moduleName: 'bundle'
-                }, {
-                    modules: ['default'],
-                    output: 'bundle',
-                    formatter: transpiler.formatters.DEFAULT
-                }, done);
-            });
-        });
-
         describe('sourceMaps', function() {
-            it('should append source maps URL if not false', function(done) {
-                transpile({
-                    sources: [inputs.default],
-                    basePath: inputDir,
-                    moduleName: 'bundle',
-                    sourceMaps: null
-                }, function(error, output) {
-                    expect(error).to.be(null);
-                    expect(toString(output)).to.contain('sourceMappingURL=bundle.map');
+            context('if not false', function() {
+                it('should append source maps URL', function(done) {
+                    transpile({
+                        sources: [inputs.default],
+                        basePath: inputDir,
+                        sourceMaps: null
+                    }, function(error, output) {
+                        expect(error).to.be(null);
+                        expect(toString(output)).to.contain('sourceMappingURL=default.map');
 
-                    done();
+                        done();
+                    });
+                });
+
+                it('should add sourceMap to output file', function(done) {
+                    transpile({
+                        sources: [inputs.default],
+                        basePath: inputDir,
+                        sourceMaps: true
+                    }, function(error, output) {
+                        expect(error).to.be(null);
+                        expect(output.sourceMap).to.eql({
+                            version: 3,
+                            sources: [ 'default.js' ],
+                            names: [],
+                            mappings: ';;IAAA,CAAC,CAAC,kBAAS,EAAE,CAAC,CAAC,CAAC' +
+                                ',CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE,EAAE,CAAC',
+                            file: 'default',
+                            sourcesContent: [ inputs.default.contents.toString('utf8') ]
+                        });
+
+                        done();
+                    });
                 });
             });
 
-            it('should not append source maps URL if false', function(done) {
-                transpile({
-                    sources: [inputs.default],
-                    basePath: inputDir,
-                    moduleName: 'bundle',
-                    sourceMaps: false
-                }, function(error, output) {
-                    expect(error).to.be(null);
-                    expect(toString(output)).to.not.contain('sourceMappingURL=bundle.map');
+            context('if false', function() {
+                it('should not append source maps URL', function(done) {
+                    transpile({
+                        sources: [inputs.default],
+                        basePath: inputDir,
+                        sourceMaps: false
+                    }, function(error, output) {
+                        expect(error).to.be(null);
+                        expect(toString(output)).to.not.contain('sourceMappingURL=default.map');
 
-                    done();
+                        done();
+                    });
                 });
             });
         });
@@ -291,12 +283,36 @@ describe('gulp-es6-module-transpiler', function() {
                 expect(function() {
                     transpile({
                         sources: [inputs.importAlt],
-                        importPaths: [inputDir]
+                        basePath: inputDir
                     }, function() {});
                 }.bind(this)).to.throwError(new RegExp(
                     'missing module import from importAlt.js for path: bar.' +
                     ' Looking in: \\["' + inputDir + '"\\]'
                 ));
+            });
+        });
+
+        it('should output one file for every input file', function(done) {
+            var sources = [inputs.default, inputs.import],
+                outputs = ['default', 'import'].map(function(source) {
+                    return make({
+                        modules: [source],
+                        output: source,
+                        formatter: transpiler.formatters.DEFAULT
+                    });
+                }),
+                i = 0;
+
+            transpile({
+                sources: sources,
+                basePath: inputDir
+            }, function(error, output) {
+                expect(error).to.be(null);
+                expect(toString(output)).to.be(outputs[i]);
+
+                if (++i === sources.length) {
+                    done();
+                }
             });
         });
     });

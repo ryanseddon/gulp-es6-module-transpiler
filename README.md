@@ -65,12 +65,6 @@ Array of path that will be used to resolve modules.
 
 Defaults to ```[ options.basePath ]```.
 
-```moduleName``` *```String```* *[optional]*
-
-Explicit name of exported module.
-
-If there is only one module being transpiled, program names the exported module by the first and only module being transpiled. If there were multiple modules registered (multiple sources piped in) program first looks for this option, then, if not set, names the module ```bundle```.
-
 ```sourceMaps``` *```Boolean```* *[optional]*
 
 If set to ```false```, sourceMappingURL is not appended to transpiled files and source maps are not applied. Defaults to ```true```.
