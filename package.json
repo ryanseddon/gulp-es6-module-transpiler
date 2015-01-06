@@ -26,7 +26,8 @@
   ],
   "main": "lib/index.js",
   "scripts": {
-    "test": "./node_modules/jshint/bin/jshint lib/index.js test/index.js && ./node_modules/mocha/bin/mocha test/index.js"
+    "test": "jshint lib/index.js test/index.js && mocha test/index.js",
+    "dev": "mocha --watch lib/index.js --watch test/index.js test/index.js"
   },
   "license": "MIT",
   "bugs": {
