@@ -86,6 +86,12 @@ describe('gulp-es6-module-transpiler', function() {
     var inputs = load(inputDir);
 
     describe('options', function() {
+        it('should not throw error if no options were provided', function() {
+            expect(function() {
+                transpiler();
+            }).to.not.throwException();
+        });
+
         describe('formatter', function() {
             it('should use DEFAULT if not specified', function(done) {
                 verify({
