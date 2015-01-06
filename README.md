@@ -50,6 +50,9 @@ Name of built-in formatter, formatter instance of formatter constructor function
 
 Defaults to [es6-module-transpiler](https://github.com/esnext/es6-module-transpiler) default formatter.
 
+**Important** es6-module-transpiler version 0.9.x supports ```bundle``` and ```commonjs``` formatters only.
+To support AMD format, please use [es6-module-transpiler-amd-formatter](https://github.com/caridy/es6-module-transpiler-amd-formatter).
+
 ```basePath``` *```String```* *[optional]*
 
 All module names will be resolved and named relatively to this path.
@@ -61,12 +64,6 @@ Defaults to ```process.cwd()```.
 Array of path that will be used to resolve modules.
 
 Defaults to ```[ options.basePath ]```.
-
-```moduleName``` *```String```* *[optional]*
-
-Explicit name of exported module.
-
-If there is only one module being transpiled, program names the exported module by the first and only module being transpiled. If there were multiple modules registered (multiple sources piped in) program first looks for this option, then, if not set, names the module ```bundle```.
 
 ```sourceMaps``` *```Boolean```* *[optional]*
 
