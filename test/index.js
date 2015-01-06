@@ -31,7 +31,9 @@ describe('gulp-es6-module-transpiler', function() {
 
         container.write(output);
 
-        return fs.readFileSync(output).toString('utf8');
+        // es6-module-transpiler appends source map URL by default
+        return fs.readFileSync(output).toString('utf8')
+            .replace(/\n\n\/\/# sourceMappingURL=.*?$/, '');
     }
 
     function load(dir) {
@@ -214,14 +216,14 @@ describe('gulp-es6-module-transpiler', function() {
 
         describe('sourceMaps', function() {
             context('if not false', function() {
-                it('should append source maps URL', function(done) {
+                it('should not append source maps URL', function(done) {
                     transpile({
                         sources: [inputs.default],
                         basePath: inputDir,
                         sourceMaps: null
                     }, function(error, output) {
                         expect(error).to.be(null);
-                        expect(toString(output)).to.contain('sourceMappingURL=default.map');
+                        expect(toString(output)).to.not.contain('sourceMappingURL=default.map');
 
                         done();
                     });
