@@ -71,6 +71,7 @@ If set to ```false```, sourceMappingURL is not appended to transpiled files and 
 
 ## Release history
 
+* 02/02/2015 - v0.2.1 - Outputs one file for every input file
 * 29/12/2014 - v0.2.0 - 0.5.0+ compatibility with es6-module-transpiler
 * 12/07/2014 - v0.1.3 - Normalises paths for windows machines
 * 08/06/2014 - v0.1.2 - Added module prefix option
@@ -88,4 +89,3 @@ If set to ```false```, sourceMappingURL is not appended to transpiled files and 
 
 [depstat-url]: https://david-dm.org/ryanseddon/gulp-es6-module-transpiler
 [depstat-image]: https://david-dm.org/ryanseddon/gulp-es6-module-transpiler.png
-
