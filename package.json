@@ -43,7 +43,7 @@
     "url": "git@github.com:ryanseddon/gulp-es6-module-transpiler.git"
   },
   "dependencies": {
-    "es6-module-transpiler": "^0.9.6",
+    "es6-module-transpiler": "^0.10.0",
     "gulp-util": "^3.0.1",
     "through2": "^0.6.1",
     "vinyl-sourcemaps-apply": "^0.1.1"
