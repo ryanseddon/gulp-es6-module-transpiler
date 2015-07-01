@@ -282,15 +282,18 @@ describe('gulp-es6-module-transpiler', function() {
     describe('conversion', function() {
         describe('error', function() {
             it('should append importPaths if "missing module import" error was thrown', function() {
-                expect(function() {
-                    transpile({
-                        sources: [inputs.importAlt],
-                        basePath: inputDir
-                    }, function() {});
-                }.bind(this)).to.throwError(new RegExp(
-                    'missing module import from importAlt.js for path: bar.' +
-                    ' Looking in: \\["' + inputDir + '"\\]'
-                ));
+                transpile({
+                    sources: [inputs.importAlt],
+                    basePath: inputDir
+                }, function(error) {
+                    // Windows compatibility
+                    var inputDirRegex = inputDir.replace(/\\/g, '\\\\\\\\');
+
+                    expect(error.message).to.match(new RegExp(
+                        'missing module import from importAlt.js for path: bar.' +
+                        ' Looking in: \\["' + inputDirRegex + '"\\]'
+                    ));
+                });
             });
         });
 
