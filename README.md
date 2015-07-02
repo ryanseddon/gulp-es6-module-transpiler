@@ -71,6 +71,7 @@ If set to ```false```, sourceMappingURL is not appended to transpiled files and 
 
 ## Release history
 
+* 02/07/2015 - v0.2.2 - Bump es6-module-transpiler to 0.10.0
 * 02/02/2015 - v0.2.1 - Outputs one file for every input file
 * 29/12/2014 - v0.2.0 - 0.5.0+ compatibility with es6-module-transpiler
 * 12/07/2014 - v0.1.3 - Normalises paths for windows machines
