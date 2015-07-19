@@ -242,7 +242,7 @@ describe('gulp-es6-module-transpiler', function() {
                             names: [],
                             mappings: ';;IAAA,CAAC,CAAC,kBAAS,EAAE,CAAC,CAAC,CAAC' +
                                 ',CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE,EAAE,CAAC',
-                            file: 'default',
+                            file: 'default.js',
                             sourcesContent: [ inputs.default.contents.toString('utf8') ]
                         });
 
@@ -297,20 +297,60 @@ describe('gulp-es6-module-transpiler', function() {
             });
         });
 
-        it('should output one file for every input file', function(done) {
+        it('should output single file with bundle formatter', function(done) {
+            var sources = [inputs.default, inputs.import],
+                expectedOutput = make({
+                    modules: ['default', 'import'],
+                    output: 'bundle',
+                    formatter: transpiler.formatters.DEFAULT
+                });
+
+            transpile({
+                sources: sources,
+                basePath: inputDir
+            }, function(error, output) {
+                expect(error).to.be(null);
+                expect(toString(output)).to.be(expectedOutput);
+                expect(output.path).to.be('bundle.js');
+                done();
+            });
+        });
+
+        it('should use requested name for bundle file', function(done) {
+            var sources = [inputs.default, inputs.import],
+                expectedOutput = make({
+                    modules: ['default', 'import'],
+                    output: 'bundle',
+                    formatter: transpiler.formatters.DEFAULT
+                });
+
+            transpile({
+                sources: sources,
+                basePath: inputDir,
+                bundleFileName: 'myBundle.js'
+            }, function(error, output) {
+                expect(error).to.be(null);
+                expect(toString(output)).to.be(expectedOutput);
+                expect(output.path).to.be('myBundle.js');
+                done();
+            });
+        });
+
+        it('should output one file for every input file with commonjs formatter', function(done) {
             var sources = [inputs.default, inputs.import],
                 outputs = ['default', 'import'].map(function(source) {
                     return make({
                         modules: [source],
                         output: source,
-                        formatter: transpiler.formatters.DEFAULT
+                        formatter: 'commonjs'
                     });
                 }),
                 i = 0;
 
             transpile({
                 sources: sources,
-                basePath: inputDir
+                basePath: inputDir,
+                formatter: 'commonjs'
             }, function(error, output) {
                 expect(error).to.be(null);
                 expect(toString(output)).to.be(outputs[i]);

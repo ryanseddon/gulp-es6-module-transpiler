@@ -37,11 +37,30 @@ describe('gulp-es6-module-transpiler use cases', function() {
             });
         });
 
-        it('should work with multiple modules', function(done) {
+        it('should work with multiple modules using bundle', function(done) {
             gulp.src([inputDir + '/main/default.js', inputDir + '/main/foo.js'])
                 .pipe(sourcemaps.init())
                 .pipe(transpile({
                     basePath: inputDir + '/main'
+                }))
+                .pipe(sourcemaps.write('./'))
+                .pipe(gulp.dest(outputDir))
+                .on('end', function() {
+                    expect(fs.existsSync(outputDir + '/bundle.js')).to.be(true);
+                    expect(fs.existsSync(outputDir + '/bundle.js.map')).to.be(true);
+                    expect(fs.readFileSync(outputDir + '/bundle.js').toString('utf8'))
+                        .to.contain('\n//# sourceMappingURL=bundle.js.map');
+
+                    done();
+                });
+        });
+
+        it('should work with multiple modules using commonjs', function(done) {
+            gulp.src([inputDir + '/main/default.js', inputDir + '/main/foo.js'])
+                .pipe(sourcemaps.init())
+                .pipe(transpile({
+                    basePath: inputDir + '/main',
+                    formatter: 'commonjs'
                 }))
                 .pipe(sourcemaps.write('./'))
                 .pipe(gulp.dest(outputDir))
