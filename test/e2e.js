@@ -79,4 +79,22 @@ describe('gulp-es6-module-transpiler use cases', function() {
                 });
         });
     });
+
+    describe('streams', function() {
+        it('should accept stream input', function(done) {
+            var inputs = [inputDir + '/main/default.js', inputDir + '/main/foo.js'];
+
+            gulp.src(inputs, { buffer: false })
+                .pipe(transpile({
+                    basePath: inputDir + '/main'
+                }))
+                .pipe(gulp.dest(outputDir))
+                .on('end', function() {
+                    expect(fs.existsSync(outputDir + '/default.js')).to.be(true);
+                    expect(fs.existsSync(outputDir + '/foo.js')).to.be(true);
+
+                    done();
+                });
+        });
+    });
 });
