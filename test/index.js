@@ -60,7 +60,7 @@ describe('gulp-es6-module-transpiler', function() {
             callback(error);
         });
 
-        stream.on('data', function (file) {
+        stream.on('data', function(file) {
             expect(file).to.be.ok();
 
             callback(null, file);
@@ -73,6 +73,10 @@ describe('gulp-es6-module-transpiler', function() {
         stream.end();
     }
 
+    function toString(file) {
+        return file.contents.toString('utf8');
+    }
+
     function verify(transpileOptions, makeOptions, callback) {
         transpile(transpileOptions, function(error, output) {
             expect(error).to.be(null);
@@ -80,10 +84,6 @@ describe('gulp-es6-module-transpiler', function() {
 
             callback();
         });
-    }
-
-    function toString(file) {
-        return file.contents.toString('utf8');
     }
 
     var inputs = load(inputDir);
@@ -238,12 +238,12 @@ describe('gulp-es6-module-transpiler', function() {
                         expect(error).to.be(null);
                         expect(output.sourceMap).to.eql({
                             version: 3,
-                            sources: [ 'default.js' ],
+                            sources: ['default.js'],
                             names: [],
                             mappings: ';;IAAA,CAAC,CAAC,kBAAS,EAAE,CAAC,CAAC,CAAC' +
                                 ',CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE,EAAE,CAAC',
                             file: 'default',
-                            sourcesContent: [ inputs.default.contents.toString('utf8') ]
+                            sourcesContent: [inputs.default.contents.toString('utf8')]
                         });
 
                         done();
