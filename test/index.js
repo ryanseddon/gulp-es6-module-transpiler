@@ -5,6 +5,7 @@ require('mocha');
 var fs = require('fs');
 var tempWrite = require('temp-write');
 var es6 = require('es6-module-transpiler');
+var Stream = require('stream');
 
 var expect = require('expect.js');
 
@@ -294,6 +295,25 @@ describe('gulp-es6-module-transpiler', function() {
                         ' Looking in: \\["' + inputDirRegex + '"\\]'
                     ));
                 });
+            });
+
+            it('should throw error if input stream emitted error', function(done) {
+                var stream = new Stream.PassThrough('some bytes');
+                var file = new gutil.File({
+                    path: 'streamed.js',
+                    contents: stream
+                });
+
+                transpile({
+                    sources: [file]
+                }, function(error) {
+                    expect(error).to.not.be(null);
+                    expect(error.message).to.be('A stream error');
+
+                    done();
+                });
+
+                stream.emit('error', new Error('A stream error'));
             });
         });
 
